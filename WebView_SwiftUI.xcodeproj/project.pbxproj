@@ -12,6 +12,8 @@
 		3EABDF62274A15A200FF7DE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EABDF61274A15A200FF7DE7 /* Assets.xcassets */; };
 		3EABDF65274A15A200FF7DE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EABDF64274A15A200FF7DE7 /* Preview Assets.xcassets */; };
 		3EABDF6C274A15C600FF7DE7 /* MyWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EABDF6B274A15C600FF7DE7 /* MyWebView.swift */; };
+		3EC5FFE72773521E0030430C /* MyTextAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5FFE62773521E0030430C /* MyTextAlertView.swift */; };
+		3EC5FFE927735C3C0030430C /* MyWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5FFE827735C3C0030430C /* MyWebViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		3EABDF64274A15A200FF7DE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3EABDF6B274A15C600FF7DE7 /* MyWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWebView.swift; sourceTree = "<group>"; };
 		3EABDF6D274A15F300FF7DE7 /* WebView-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WebView-SwiftUI-Info.plist"; sourceTree = SOURCE_ROOT; };
+		3EC5FFE62773521E0030430C /* MyTextAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTextAlertView.swift; sourceTree = "<group>"; };
+		3EC5FFE827735C3C0030430C /* MyWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWebViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 				3EABDF5D274A15A000FF7DE7 /* WebView_SwiftUIApp.swift */,
 				3EABDF5F274A15A000FF7DE7 /* ContentView.swift */,
 				3EABDF6B274A15C600FF7DE7 /* MyWebView.swift */,
+				3EC5FFE62773521E0030430C /* MyTextAlertView.swift */,
+				3EC5FFE827735C3C0030430C /* MyWebViewModel.swift */,
 				3EABDF61274A15A200FF7DE7 /* Assets.xcassets */,
 				3EABDF63274A15A200FF7DE7 /* Preview Content */,
 			);
@@ -143,7 +149,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EABDF60274A15A000FF7DE7 /* ContentView.swift in Sources */,
+				3EC5FFE927735C3C0030430C /* MyWebViewModel.swift in Sources */,
 				3EABDF6C274A15C600FF7DE7 /* MyWebView.swift in Sources */,
+				3EC5FFE72773521E0030430C /* MyTextAlertView.swift in Sources */,
 				3EABDF5E274A15A000FF7DE7 /* WebView_SwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
