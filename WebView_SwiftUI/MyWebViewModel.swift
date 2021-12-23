@@ -34,4 +34,7 @@ class MyWebViewModel: ObservableObject {
     
     // 웹 뷰의 url 변경 이벤트
     var changedUrlSubject = PassthroughSubject<MyWebViewModel.URL_Type, Never>()
+    
+    // 웹 뷰의 네비게이션 액션 이벤트
+    var webNavigationSubject = PassthroughSubject<Web_Navigation, Never>()
 }

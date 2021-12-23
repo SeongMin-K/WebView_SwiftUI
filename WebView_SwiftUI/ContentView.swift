@@ -79,6 +79,7 @@ struct ContentView: View {
                 Spacer()
                 Button(action: {
                     print("뒤로 가기")
+                    self.myWebVM.webNavigationSubject.send(.back)
                 }, label: {
                     Image(systemName: "arrow.backward")
                         .font(.system(size: 23))
@@ -90,6 +91,7 @@ struct ContentView: View {
                 }
                 Button(action: {
                     print("앞으로 가기")
+                    self.myWebVM.webNavigationSubject.send(.forward)
                 }, label: {
                     Image(systemName: "arrow.forward")
                         .font(.system(size: 23))
@@ -101,6 +103,7 @@ struct ContentView: View {
                 }
                 Button(action: {
                     print("새로고침")
+                    self.myWebVM.webNavigationSubject.send(.refresh)
                 }, label: {
                     Image(systemName: "arrow.clockwise")
                         .font(.system(size: 23))
