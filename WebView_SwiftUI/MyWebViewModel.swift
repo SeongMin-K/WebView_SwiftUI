@@ -37,4 +37,10 @@ class MyWebViewModel: ObservableObject {
     
     // 웹 뷰의 네비게이션 액션 이벤트
     var webNavigationSubject = PassthroughSubject<Web_Navigation, Never>()
+    
+    // 웹 뷰의 타이틀 이벤트
+    var webSiteTitleSubject = PassthroughSubject<String, Never>()
+    
+    // iOS -> JS 함수 호출
+    var nativeToJsEvent = PassthroughSubject<String, Never>()
 }

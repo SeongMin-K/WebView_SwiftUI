@@ -38,7 +38,6 @@ struct MyWebView: UIViewRepresentable {
     func createWKWebConfig() -> WKWebViewConfiguration {
         let preferences = WKPreferences()
         preferences.javaScriptCanOpenWindowsAutomatically = true
-        preferences.javaScriptEnabled = true
         
         let wkWebConfig = WKWebViewConfiguration()
         
@@ -91,6 +90,31 @@ extension MyWebView.Coordinator: WKNavigationDelegate {
     // 웹 뷰 검색 완료
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print(#fileID, #function, "called")
+        
+        webView.evaluateJavaScript("document.title") { (response, error) in
+            if error != nil {
+                print("Title Error!")
+            }
+            if let title = response as? String {
+                self.myWebView.viewModel.webSiteTitleSubject.send(title)
+            }
+        }
+        
+        myWebView
+            .viewModel
+            .nativeToJsEvent
+            .sink { message in
+                print(#fileID, #function, "called / nativeToJsEvent 들어옴 / message:", message)
+                webView.evaluateJavaScript("nativeToJsEventCall('\(message)');", completionHandler: { (result, error) in
+                    if let result = result {
+                        print("nativeToJs result 성공:", result)
+                    }
+                    if let error = error {
+                        print("nativeToJs result 실패:", error.localizedDescription)
+                    }
+                })
+            }.store(in: &subscriptions)
+        
         myWebView
             .viewModel
             .changedUrlSubject

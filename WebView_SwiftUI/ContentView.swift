@@ -11,6 +11,7 @@ struct ContentView: View {
     @EnvironmentObject var myWebVM: MyWebViewModel
     @State var textString = ""
     @State var shouldShowAlert = false
+    @State var webTitle: String = ""
 
     var body: some View {
         NavigationView {
@@ -19,7 +20,7 @@ struct ContentView: View {
                     MyWebView(urlToLoad: "https://tuentuenna.github.io/simple_js_alert")
                     webViewBottomTabbar
                 }
-                .navigationBarTitle(Text("WebView"), displayMode: .inline)
+                .navigationBarTitle(Text(webTitle), displayMode: .inline)
                 .navigationBarItems(
                     leading: siteMenu,
                     trailing: Button("iOS -> JS") {
@@ -34,6 +35,10 @@ struct ContentView: View {
                     .background(Color.yellow)
                     .offset(y: -(UIScreen.main.bounds.height * 0.32))
             }
+            .onReceive(myWebVM.webSiteTitleSubject, perform: { receivedWebTitle in
+                print("ContentView - webTitle:", webTitle)
+                self.webTitle = receivedWebTitle
+            })
         }
     }
     
