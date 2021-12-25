@@ -43,4 +43,7 @@ class MyWebViewModel: ObservableObject {
     
     // iOS -> JS 함수 호출
     var nativeToJsEvent = PassthroughSubject<String, Never>()
+    
+    // JS Alert 들어오면 이벤트 보내기
+    var JsAlertEvent = PassthroughSubject<JsAlert, Never>()
 }

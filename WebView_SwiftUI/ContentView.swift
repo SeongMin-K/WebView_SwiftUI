@@ -12,6 +12,7 @@ struct ContentView: View {
     @State var textString = ""
     @State var shouldShowAlert = false
     @State var webTitle: String = ""
+    @State var jsAlert: JsAlert?
 
     var body: some View {
         NavigationView {
@@ -28,6 +29,9 @@ struct ContentView: View {
                         self.shouldShowAlert.toggle()
                     }
                 )
+                .alert(item: $jsAlert, content: { alert in
+                    createAlert(alert)
+                })
                 if self.shouldShowAlert { createTextAlert() }
                 Text(textString)
                     .font(.system(size: 26))
@@ -38,6 +42,10 @@ struct ContentView: View {
             .onReceive(myWebVM.webSiteTitleSubject, perform: { receivedWebTitle in
                 print("ContentView - webTitle:", webTitle)
                 self.webTitle = receivedWebTitle
+            })
+            .onReceive(myWebVM.JsAlertEvent, perform: { jsAlert in
+                print("ContentView - jsAlert:", jsAlert)
+                self.jsAlert = jsAlert
             })
         }
     }
@@ -123,6 +131,12 @@ struct ContentView: View {
 extension ContentView {
     func createTextAlert() -> MyTextAlertView {
         MyTextAlertView(textString: $textString, showAlert: $shouldShowAlert, title: "iOS -> JS 보내기", message: "")
+    }
+    
+    func createAlert(_ alert: JsAlert) -> Alert {
+        Alert(title: Text(alert.type.description), message: Text(alert.message), dismissButton: .default(Text("확인"), action: {
+            print("알림창 확인 버튼이 클릭됨")
+        }))
     }
 }
 

@@ -127,7 +127,15 @@ extension MyWebView.Coordinator: WKNavigationDelegate {
 }
 
 extension MyWebView.Coordinator: WKScriptMessageHandler {
+    // 웹 뷰 JS에서 iOS 네이티브를 호출하는 메소드들이 이쪽을 탐
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("MyWebViewCoordinator - userContentController / message:", message)
+        if message.name == "callbackHandler" {
+            print("JSON 데이터가 웹으로부터 전달됨", message.body)
+            if let receivedData: [String: String] = message.body as? Dictionary {
+                print("receivedData:", receivedData)
+                myWebView.viewModel.JsAlertEvent.send(JsAlert(receivedData["message"], .bridge))
+            }
+        }
     }
 }
