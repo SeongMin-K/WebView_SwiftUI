@@ -60,7 +60,11 @@ struct MyWebView: UIViewRepresentable {
 }
 
 extension MyWebView.Coordinator: WKUIDelegate {
-    
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        print("webView runJavaScriptAlertPanelWithMessage")
+        self.myWebView.viewModel.JsAlertEvent.send(JsAlert(message, .alert))
+        completionHandler()
+    }
 }
 
 extension MyWebView.Coordinator: WKNavigationDelegate {
