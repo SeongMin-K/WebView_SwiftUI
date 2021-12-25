@@ -70,7 +70,11 @@ extension MyWebView.Coordinator: WKUIDelegate {
 extension MyWebView.Coordinator: WKNavigationDelegate {
     // 웹 뷰 검색 시작
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print(#fileID, #function, "called")
+        print(#fileID, "didStartProvisionalNavigation called")
+        
+        // 로딩 중 알리기
+        myWebView.viewModel.shouldShowIndicator.send(true)
+        
         myWebView
             .viewModel
             .webNavigationSubject
@@ -90,10 +94,14 @@ extension MyWebView.Coordinator: WKNavigationDelegate {
                 }
             }.store(in: &subscriptions)
     }
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        print(#fileID, "didCommit called")
+        myWebView.viewModel.shouldShowIndicator.send(true)
+    }
     
     // 웹 뷰 검색 완료
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print(#fileID, #function, "called")
+        print(#fileID, "didFinish called")
         
         webView.evaluateJavaScript("document.title") { (response, error) in
             if error != nil {
@@ -127,6 +135,27 @@ extension MyWebView.Coordinator: WKNavigationDelegate {
                 print("변경된 url:", changedUrl)
                 webView.load(URLRequest(url: changedUrl))
             }.store(in: &subscriptions)
+        
+        // 로딩이 끝났다고 알림
+        self.myWebView.viewModel.shouldShowIndicator.send(false)
+    }
+    
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        print(#fileID, #function, "called")
+        // 로딩이 끝났다고 알림
+        self.myWebView.viewModel.shouldShowIndicator.send(false)
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print(#fileID, "didFail called")
+        // 로딩이 끝났다고 알림
+        self.myWebView.viewModel.shouldShowIndicator.send(false)
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print(#fileID, "didFailProvisionalNavigation called")
+        // 로딩이 끝났다고 알림
+        self.myWebView.viewModel.shouldShowIndicator.send(false)
     }
 }
 

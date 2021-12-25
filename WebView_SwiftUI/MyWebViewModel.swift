@@ -46,4 +46,7 @@ class MyWebViewModel: ObservableObject {
     
     // JS Alert 들어오면 이벤트 보내기
     var JsAlertEvent = PassthroughSubject<JsAlert, Never>()
+    
+    // 로딩 여부 이벤트
+    var shouldShowIndicator = PassthroughSubject<Bool, Never>()
 }

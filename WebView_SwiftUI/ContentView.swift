@@ -11,7 +11,8 @@ struct ContentView: View {
     @EnvironmentObject var myWebVM: MyWebViewModel
     @State var textString = ""
     @State var shouldShowAlert = false
-    @State var webTitle: String = ""
+    @State  var isLoading = false
+    @State var webTitle = ""
     @State var jsAlert: JsAlert?
 
     var body: some View {
@@ -33,11 +34,12 @@ struct ContentView: View {
                     createAlert(alert)
                 })
                 if self.shouldShowAlert { createTextAlert() }
-                Text(textString)
-                    .font(.system(size: 26))
-                    .fontWeight(.bold)
-                    .background(Color.yellow)
-                    .offset(y: -(UIScreen.main.bounds.height * 0.32))
+                if self.isLoading { LoadingScreenView() }
+//                Text(textString)
+//                    .font(.system(size: 26))
+//                    .fontWeight(.bold)
+//                    .background(Color.yellow)
+//                    .offset(y: -(UIScreen.main.bounds.height * 0.32))
             }
             .onReceive(myWebVM.webSiteTitleSubject, perform: { receivedWebTitle in
                 print("ContentView - webTitle:", webTitle)
@@ -46,6 +48,10 @@ struct ContentView: View {
             .onReceive(myWebVM.JsAlertEvent, perform: { jsAlert in
                 print("ContentView - jsAlert:", jsAlert)
                 self.jsAlert = jsAlert
+            })
+            .onReceive(myWebVM.shouldShowIndicator, perform: { isLoading in
+                print("ContentView - isLoading:", isLoading)
+                self.isLoading = isLoading
             })
         }
     }
