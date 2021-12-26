@@ -12,6 +12,7 @@ import Combine
 struct MyWebView: UIViewRepresentable {
     @EnvironmentObject var viewModel: MyWebViewModel
     var urlToLoad: String
+    let refreshHelper = WebViewRefreshControlHelper()
     
     func makeCoordinator() -> MyWebView.Coordinator {
         return MyWebView.Coordinator(self)
@@ -25,6 +26,18 @@ struct MyWebView: UIViewRepresentable {
         webView.uiDelegate = context.coordinator
         webView.navigationDelegate = context.coordinator
         webView.allowsBackForwardNavigationGestures = true
+        
+        let myRefreshControl = UIRefreshControl()
+        myRefreshControl.tintColor = UIColor.blue
+        
+        refreshHelper.viewModel = viewModel
+        refreshHelper.refreshControl = myRefreshControl
+        
+        myRefreshControl.addTarget(refreshHelper, action: #selector(WebViewRefreshControlHelper.didRefresh), for: .valueChanged)
+        
+        webView.scrollView.refreshControl = myRefreshControl
+        webView.scrollView.bounces = true
+        
         webView.load(URLRequest(url: url))
         
         return webView
