@@ -81,6 +81,31 @@ extension MyWebView.Coordinator: WKUIDelegate {
 }
 
 extension MyWebView.Coordinator: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        // Request URL이 없으면 return
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return
+        }
+        
+        switch url.scheme {
+        // 전화번호, 이메일이 들어오면 외부로 링크 열기
+        case "tel", "mailto":
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            decisionHandler(.cancel)
+        default:
+            // 특정 도메인 이동 못하게 하기
+            switch url.host {
+            case "www.youtube.com":
+                print("유튜브 이동이 금지됨")
+                myWebView.viewModel.JsAlertEvent.send(JsAlert(url.host, .blocked))
+                decisionHandler(.cancel)
+            default:
+                decisionHandler(.allow)
+            }
+        }
+    }
+    
     // 웹 뷰 검색 시작
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print(#fileID, "didStartProvisionalNavigation called")

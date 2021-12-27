@@ -9,13 +9,15 @@ import Foundation
 
 struct JsAlert: Identifiable {
     enum JS_Type: CustomStringConvertible {
-        case alert, bridge
+        case alert, bridge, blocked
         var description: String {
             switch self {
             case .alert:
                 return "Alert 타입"
             case .bridge:
                 return "Bridge 타입"
+            case .blocked:
+                return "차단된 사이트"
             }
         }
     }
