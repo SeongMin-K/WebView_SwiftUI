@@ -49,4 +49,7 @@ class MyWebViewModel: ObservableObject {
     
     // 로딩 여부 이벤트
     var shouldShowIndicator = PassthroughSubject<Bool, Never>()
+    
+    // 로딩 여부 이벤트
+    var downloadEvent = PassthroughSubject<URL, Never>()
 }

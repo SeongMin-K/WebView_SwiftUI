@@ -9,7 +9,7 @@ import Foundation
 
 struct JsAlert: Identifiable {
     enum JS_Type: CustomStringConvertible {
-        case alert, bridge, blocked
+        case alert, bridge, blocked, downloadFailed, downloadNotAvailable
         var description: String {
             switch self {
             case .alert:
@@ -18,6 +18,10 @@ struct JsAlert: Identifiable {
                 return "Bridge 타입"
             case .blocked:
                 return "차단된 사이트"
+            case .downloadFailed:
+                return "파일 다운로드 실패"
+            case .downloadNotAvailable:
+                return "파일 다운로드 불가"
             }
         }
     }

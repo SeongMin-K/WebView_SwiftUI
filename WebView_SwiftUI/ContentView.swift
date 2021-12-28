@@ -53,6 +53,10 @@ struct ContentView: View {
                 print("ContentView - isLoading:", isLoading)
                 self.isLoading = isLoading
             })
+            .onReceive(myWebVM.downloadEvent, perform: { fileUrl in
+                print("ContentView - fileUrl:", fileUrl)
+                shareSheet(url: fileUrl)
+            })
         }
     }
     
@@ -143,6 +147,12 @@ extension ContentView {
         Alert(title: Text(alert.type.description), message: Text(alert.message), dismissButton: .default(Text("확인"), action: {
             print("알림창 확인 버튼이 클릭됨")
         }))
+    }
+    
+    func shareSheet(url: URL) {
+        print(#fileID, #function, "called")
+        let uiActivityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(uiActivityVC, animated: true, completion: nil)
     }
 }
 

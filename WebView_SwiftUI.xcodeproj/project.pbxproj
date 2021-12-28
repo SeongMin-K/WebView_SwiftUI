@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E59620D277B07C6003C6E67 /* MimeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E59620C277B07C6003C6E67 /* MimeTypes.swift */; };
+		3E59620F277B08A8003C6E67 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E59620E277B08A8003C6E67 /* String+Ext.swift */; };
 		3E632AC52776F0FE00E87A07 /* JsAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E632AC42776F0FE00E87A07 /* JsAlert.swift */; };
 		3E632AC72776F93900E87A07 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E632AC62776F93900E87A07 /* LoadingIndicatorView.swift */; };
 		3E632AC92776F9EF00E87A07 /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E632AC82776F9EF00E87A07 /* LoadingScreenView.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E59620C277B07C6003C6E67 /* MimeTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeTypes.swift; sourceTree = "<group>"; };
+		3E59620E277B08A8003C6E67 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		3E632AC42776F0FE00E87A07 /* JsAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsAlert.swift; sourceTree = "<group>"; };
 		3E632AC62776F93900E87A07 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		3E632AC82776F9EF00E87A07 /* LoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenView.swift; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				3E632AC82776F9EF00E87A07 /* LoadingScreenView.swift */,
 				3E632AC42776F0FE00E87A07 /* JsAlert.swift */,
 				3EC5FFE827735C3C0030430C /* MyWebViewModel.swift */,
+				3E59620C277B07C6003C6E67 /* MimeTypes.swift */,
+				3E59620E277B08A8003C6E67 /* String+Ext.swift */,
 				3EABDF61274A15A200FF7DE7 /* Assets.xcassets */,
 				3EABDF63274A15A200FF7DE7 /* Preview Content */,
 			);
@@ -165,10 +171,12 @@
 				3EA56A9727783AE700540E8F /* WebViewRefreshControlHelper.swift in Sources */,
 				3EC5FFE927735C3C0030430C /* MyWebViewModel.swift in Sources */,
 				3E632AC92776F9EF00E87A07 /* LoadingScreenView.swift in Sources */,
+				3E59620D277B07C6003C6E67 /* MimeTypes.swift in Sources */,
 				3EABDF6C274A15C600FF7DE7 /* MyWebView.swift in Sources */,
 				3E632AC72776F93900E87A07 /* LoadingIndicatorView.swift in Sources */,
 				3EC5FFE72773521E0030430C /* MyTextAlertView.swift in Sources */,
 				3EABDF5E274A15A000FF7DE7 /* WebView_SwiftUIApp.swift in Sources */,
+				3E59620F277B08A8003C6E67 /* String+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
