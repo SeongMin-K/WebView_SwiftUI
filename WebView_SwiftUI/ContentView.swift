@@ -148,9 +148,16 @@ extension ContentView {
             print("알림창 확인 버튼이 클릭됨")
         }))
     }
-    
+
     func shareSheet(url: URL) {
         print(#fileID, #function, "called")
+        
+        guard let topVC = UIApplication.shared.topViewController() else { return }
+        if topVC is UIActivityViewController {
+            print("공유하기가 이미 실행 중임")
+            return
+        }
+
         let uiActivityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(uiActivityVC, animated: true, completion: nil)
     }
@@ -159,5 +166,40 @@ extension ContentView {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+// UIApplication
+extension UIApplication {
+    func topViewController() -> UIViewController? {
+       // 애플리케이션에서 키 윈도우로 제일 아래 뷰 컨트롤러를 찾고
+       // 해당 뷰 컨트롤러를 기점으로 최상단의 뷰 컨트롤러를 찾아서 반환
+       return UIApplication.shared.windows
+              .filter { $0.isKeyWindow }
+              .first?.rootViewController?
+              .topViewController()
+    }
+}
+
+// UIViewController
+extension UIViewController {
+    func topViewController() -> UIViewController {
+        // 프리젠트 방식의 뷰 컨트롤러가 있다면
+        if let presented = self.presentedViewController {
+            // 해당 뷰 컨트롤러에서 재귀
+            return presented.topViewController()
+        }
+        // 자기 자신이 네비게이션 컨트롤러라면
+        if let navigation = self as? UINavigationController {
+            // 네비게이션 컨트롤러에서 보이는 컨트롤러에서 재귀
+            return navigation.visibleViewController?.topViewController() ?? navigation
+        }
+        // 최상단이 탭바 컨트롤러 라면
+        if let tab = self as? UITabBarController {
+            // 선택된 뷰 컨트롤러에서 재귀
+            return tab.selectedViewController?.topViewController() ?? tab
+        }
+        // 재귀를 타다가 최상단 뷰 컨트롤러를 반환
+        return self
     }
 }
